@@ -17,6 +17,7 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      keyword: '',
       quatCongNghiep: [],
       lyToGiay: [],
       ttMyNghe: [],
@@ -45,9 +46,23 @@ class Home extends React.Component {
     return Object.keys(state).length ? state : null;
   }
 
+  handleSearch = () => {
+    // navigate search result screen
+    this.props.navigation.navigate('SearchResult', {
+      keyword: this.state.keyword,
+    });
+  };
+
+  handlePress = (sp) => {
+    this.props.navigation.navigate('ProductDetail', {sp: sp});
+  };
+
   renderContent = (sp = []) => {
     return sp.map((item) => (
-      <TouchableOpacity key={item.idsp} style={styles.productContainer}>
+      <TouchableOpacity
+        key={item.idsp}
+        style={styles.productContainer}
+        onPress={() => this.handlePress(item)}>
         <Image
           source={{
             uri: item.hinhsp,
@@ -63,7 +78,7 @@ class Home extends React.Component {
   };
   render() {
     return (
-      <SafeAreaView style={{flex: 0}}>
+      <SafeAreaView style={styles.screenContainer}>
         <ScrollView>
           <View style={styles.header}>
             <Text>this is home</Text>
@@ -83,6 +98,7 @@ class Home extends React.Component {
                 name="search"
                 size={24}
                 color="black"
+                onPress={this.handleSearch}
               />
             }
             leftIconContainerStyle={{marginLeft: 0}}
@@ -91,6 +107,8 @@ class Home extends React.Component {
             containerStyle={styles.searchContainer}
             inputContainerStyle={styles.searchInputContainer}
             inputStyle={styles.searchInput}
+            onChangeText={(text) => this.setState({keyword: text})}
+            value={this.state.keyword}
           />
           <View style={styles.slideContainer}>
             <Image

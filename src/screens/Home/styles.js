@@ -2,6 +2,7 @@ import {StyleSheet} from 'react-native';
 import {verticalScale, scale, width, moderateScale} from '../../style/scaling';
 
 export default StyleSheet.create({
+  screenContainer: {flex: 0, backgroundColor: 'white'},
   header: {
     flexDirection: 'row',
     height: verticalScale(40),
@@ -50,6 +51,7 @@ export default StyleSheet.create({
     resizeMode: 'cover',
   },
   sectionContainer: {
+    backgroundColor: 'transparent',
     marginVertical: verticalScale(2.5),
   },
   sectionTitle: {
@@ -60,14 +62,23 @@ export default StyleSheet.create({
     fontSize: moderateScale(20),
   },
   scrollContentContainer: {
+    backgroundColor: 'transparent',
     width: width + scale(5),
     // height: verticalScale(120),
   },
   productContainer: {
-    width: verticalScale(120),
-    height: verticalScale(120),
+    backgroundColor: 'white',
+    width: verticalScale(150),
+    height: verticalScale(150),
     marginRight: scale(5),
     alignItems: 'center',
+    borderColor: '#eeeeee',
+    borderWidth: 0.8,
+    shadowColor: '#000',
+    shadowOpacity: 0.16,
+    shadowOffset: {width: 0, height: verticalScale(150)},
+    shadowRadius: 6,
+    elevation: 1,
   },
   productImage: {
     flex: 4,

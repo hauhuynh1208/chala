@@ -1,30 +1,64 @@
 import React from 'react';
 import styles from './styles';
 import {TouchableOpacity, View, Text, SafeAreaView, Image} from 'react-native';
+import {connect} from 'react-redux';
+import {actions} from '../../actions/actions';
 
 class Product extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      spCat: [],
+    };
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    let state = {};
+    if (nextProps.sp.spCat !== prevState.spCat) {
+      state.spCat = nextProps.sp.spCat;
+    }
+    return Object.keys(state).length ? state : null;
+  }
+  componentDidMount() {
+    this.props.fetchProductCat();
+  }
+
+  handlePress = (cate) => {
+    this.props.navigation.navigate('ProductList', {productCat: cate});
+  };
+
   render() {
+    const {spCat} = this.state;
     return (
       <SafeAreaView>
         <View style={styles.container}>
-          {new Array(5).fill(1).map((item, index) => (
-            <TouchableOpacity key={index} style={styles.productContainer}>
-              <Image
-                source={{
-                  uri: 'https://loremflickr.com/g/320/240/paris,girl/all',
-                }}
-                style={styles.productImage}
-              />
-              <Text numberOfLines={1} style={styles.productName}>
-                MÁY LẠNH DI ĐỘNG SAC-6500
-              </Text>
-              <Text style={styles.productPrice}>Giá: Liên hệ</Text>
-            </TouchableOpacity>
-          ))}
+          {spCat &&
+            spCat.map((item) => (
+              <TouchableOpacity
+                key={item.idsp}
+                style={styles.productContainer}
+                onPress={() => this.handlePress(item)}>
+                <Image
+                  source={{
+                    uri: item.hinhsp,
+                  }}
+                  style={styles.productImage}
+                />
+                <Text numberOfLines={1} style={styles.productName}>
+                  {item.tensp}
+                </Text>
+              </TouchableOpacity>
+            ))}
         </View>
       </SafeAreaView>
     );
   }
 }
 
-export default Product;
+function mapStateToProps(state) {
+  return {
+    sp: state.sp,
+  };
+}
+
+export default connect(mapStateToProps, actions)(Product);
