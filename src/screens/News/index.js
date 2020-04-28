@@ -1,30 +1,65 @@
 import React from 'react';
 import styles from './styles';
 import {TouchableOpacity, View, Text, SafeAreaView, Image} from 'react-native';
+import {connect} from 'react-redux';
+import {actions} from '../../actions/actions';
 
 class News extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      news: [],
+    };
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    let state = {};
+    if (nextProps.news !== prevState.news) {
+      state.news = nextProps.news;
+    }
+    return Object.keys(state).length ? state : null;
+  }
+  componentDidMount() {
+    this.props.getNews();
+  }
+
+  handlePress = (news) => {
+    this.props.navigation.navigate('NewsDetail', {news: news});
+  };
+
   render() {
+    const {news} = this.state;
+    console.log(news, 'news');
     return (
       <SafeAreaView>
         <View style={styles.container}>
-          {new Array(5).fill(1).map((item, index) => (
-            <TouchableOpacity key={index} style={styles.productContainer}>
-              <Image
-                source={{
-                  uri: 'https://loremflickr.com/g/320/240/paris,girl/all',
-                }}
-                style={styles.productImage}
-              />
-              <Text numberOfLines={1} style={styles.productName}>
-                MÁY LẠNH DI ĐỘNG SAC-6500
-              </Text>
-              <Text style={styles.productPrice}>Giá: Liên hệ</Text>
-            </TouchableOpacity>
-          ))}
+          {news.data &&
+            news.data.map((item) => (
+              <TouchableOpacity
+                key={item.id}
+                style={styles.productContainer}
+                onPress={() => this.handlePress(item)}>
+                <Image
+                  source={{
+                    uri: item.hinh,
+                  }}
+                  style={styles.productImage}
+                />
+                <Text numberOfLines={1} style={styles.productName}>
+                  {item.ten}
+                </Text>
+              </TouchableOpacity>
+            ))}
         </View>
       </SafeAreaView>
     );
   }
 }
 
-export default News;
+function mapStateToProps(state) {
+  return {
+    news: state.news,
+  };
+}
+
+export default connect(mapStateToProps, actions)(News);

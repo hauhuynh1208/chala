@@ -10,6 +10,7 @@ import Product from './src/screens/Product';
 import ProductList from './src/screens/ProductList';
 import ProductDetail from './src/screens/ProductDetail';
 import News from './src/screens/News';
+import NewsDetail from './src/screens/NewsDetail';
 import Cart from './src/screens/Cart';
 import {Provider} from 'react-redux';
 import {store} from './src/store';
@@ -96,6 +97,28 @@ function ProductStackScreen() {
   );
 }
 
+const NewsStack = createStackNavigator();
+
+function NewsStackScreen() {
+  return (
+    <NewsStack.Navigator screenOptions={defaultHeaderStyle}>
+      <NewsStack.Screen
+        options={{headerShown: false}}
+        name="News"
+        component={News}
+      />
+      <NewsStack.Screen
+        options={{
+          headerTitle: 'Bài viết tin tức',
+          headerBackTitleVisible: false,
+        }}
+        name="NewsDetail"
+        component={NewsDetail}
+      />
+    </NewsStack.Navigator>
+  );
+}
+
 const Tab = createBottomTabNavigator();
 
 export default function AppNavigation() {
@@ -135,7 +158,7 @@ export default function AppNavigation() {
           }}>
           <Tab.Screen name="Home" component={HomeStackScreen} />
           <Tab.Screen name="Product" component={ProductStackScreen} />
-          <Tab.Screen name="News" component={News} />
+          <Tab.Screen name="News" component={NewsStackScreen} />
           <Tab.Screen name="Cart" component={Cart} />
         </Tab.Navigator>
       </NavigationContainer>

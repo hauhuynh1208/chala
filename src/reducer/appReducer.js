@@ -77,6 +77,21 @@ const spReducer = (state = {}, action) => {
   }
 };
 
+const newsReducer = (state = {}, action) => {
+  var _state = JSON.parse(JSON.stringify(state));
+  console.log(action.data);
+  switch (action.type) {
+    case actionConstants.GET_NEWS_SUCCESS:
+      _state.data = action.data.data;
+      return _state;
+    case actionConstants.GET_NEWS_FAILURE:
+      _state = action.data.err;
+      return _state;
+    default:
+      return _state;
+  }
+};
+
 const cartReducer = (state = {cart: []}, action) => {
   var _state = JSON.parse(JSON.stringify(state));
   switch (action.type) {
@@ -96,6 +111,7 @@ const combinedReducer = combineReducers({
   giay: giayReducer,
   tt: ttReducer,
   sp: spReducer,
+  news: newsReducer,
   cart: cartReducer,
 });
 

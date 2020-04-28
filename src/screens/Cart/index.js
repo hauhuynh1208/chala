@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './styles';
-import {View, Text, ScrollView, Image} from 'react-native';
+import {View, Text, ScrollView, Image, SafeAreaView} from 'react-native';
 import {connect} from 'react-redux';
 import {actions} from '../../actions/actions';
 import {TouchableOpacity} from 'react-native-gesture-handler';
@@ -23,20 +23,25 @@ class Cart extends React.Component {
   render() {
     const {cart} = this.state;
     return (
-      <ScrollView style={{backgroundColor: 'white'}}>
-        {cart &&
-          cart.map((prod) => (
-            <View style={styles.itemContainer} key={prod.idsp}>
-              <View style={styles.productImgContainer}>
-                <Image style={styles.productImg} source={{uri: prod.hinhsp}} />
+      <SafeAreaView>
+        <ScrollView style={{backgroundColor: 'white'}}>
+          {cart &&
+            cart.map((prod) => (
+              <View style={styles.itemContainer} key={prod.idsp}>
+                <View style={styles.productImgContainer}>
+                  <Image
+                    style={styles.productImg}
+                    source={{uri: prod.hinhsp}}
+                  />
+                </View>
+                <Text style={styles.productText}>{prod.tensp}</Text>
               </View>
-              <Text style={styles.productText}>{prod.tensp}</Text>
-            </View>
-          ))}
-        <TouchableOpacity style={styles.checkoutBtn}>
-          <Text style={styles.checkoutText}>ĐĂNG KÝ MUA HÀNG</Text>
-        </TouchableOpacity>
-      </ScrollView>
+            ))}
+          <TouchableOpacity style={styles.checkoutBtn}>
+            <Text style={styles.checkoutText}>ĐĂNG KÝ MUA HÀNG</Text>
+          </TouchableOpacity>
+        </ScrollView>
+      </SafeAreaView>
     );
   }
 }

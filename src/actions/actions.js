@@ -8,6 +8,7 @@ export const actions = {
   getMyNghe,
   fetchProductCat,
   getProductList,
+  getNews,
   addToCart,
   retrieveCart,
 };
@@ -153,6 +154,33 @@ function getProductList(productCateId) {
         });
         return dispatch({
           type: actionConstants.GET_PRODUCT_LIST_SUCCESS,
+          data: resp,
+        });
+      })
+      .catch((err) => {
+        dispatch({
+          type: actionConstants.END_QUERY,
+        });
+        return dispatch({
+          type: actionConstants.GET_PRODUCT_LIST_FAILURE,
+          data: err,
+        });
+      });
+  };
+}
+
+function getNews() {
+  return async (dispatch, getState) => {
+    dispatch({type: actionConstants.START_QUERY});
+    await axios
+      .get(`${API_URL}/gettintuc.php`)
+      .then((resp) => {
+        console.log(resp, 'resp');
+        dispatch({
+          type: actionConstants.END_QUERY,
+        });
+        return dispatch({
+          type: actionConstants.GET_NEWS_SUCCESS,
           data: resp,
         });
       })
