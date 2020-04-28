@@ -11,6 +11,10 @@ export default StyleSheet.create({
     paddingVertical: verticalScale(2.5),
     marginVertical: verticalScale(2.5),
   },
+  logo: {
+    width: scale(60),
+    height: verticalScale(30),
+  },
   iconContainer: {
     position: 'absolute',
     height: '100%',

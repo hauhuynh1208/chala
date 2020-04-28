@@ -12,6 +12,7 @@ import {Icon, Input} from 'react-native-elements';
 import Section from './Section';
 import {connect} from 'react-redux';
 import {actions} from '../../actions/actions';
+import {logo} from '../../assets';
 
 class Home extends React.Component {
   constructor(props) {
@@ -81,7 +82,7 @@ class Home extends React.Component {
       <SafeAreaView style={styles.screenContainer}>
         <ScrollView>
           <View style={styles.header}>
-            <Text>this is home</Text>
+            <Image source={logo} style={styles.logo} />
             <View style={styles.iconContainer}>
               <Icon
                 type="material-community"
