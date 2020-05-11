@@ -13,6 +13,7 @@ export default StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     height: height,
+    marginBottom: verticalScale(50),
   },
   imgGallery: {
     flexDirection: 'row',
@@ -54,6 +55,11 @@ export default StyleSheet.create({
     fontWeight: '500',
   },
   content: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
+  },
+  webViewContent: {
     flex: 1,
     width: '100%',
     height: '100%',

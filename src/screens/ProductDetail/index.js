@@ -13,6 +13,8 @@ import {WebView} from 'react-native-webview';
 import {connect} from 'react-redux';
 import {actions} from '../../actions/actions';
 
+const injectedJs = `const meta = document.createElement('meta'); meta.setAttribute('content', 'width=width, initial-scale=1, maximum-scale=1, user-scalable=2.0'); meta.setAttribute('name', 'viewport'); document.getElementsByTagName('head')[0].appendChild(meta); `;
+
 class ProductDetail extends React.Component {
   constructor(props) {
     super(props);
@@ -94,6 +96,11 @@ class ProductDetail extends React.Component {
             <View style={styles.content}>
               <WebView
                 source={{html: activeTab === 0 ? sp.thongtinsp : sp.motasp}}
+                style={styles.webViewContent}
+                injectedJavaScript={injectedJs}
+                onMessage={(event) => {
+                  alert(event.nativeEvent.data);
+                }}
               />
             </View>
           </View>
