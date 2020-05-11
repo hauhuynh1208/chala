@@ -10,6 +10,12 @@ const generalReducer = (state = {}, action) => {
     case actionConstants.QUERY_SP_FAILURE:
       _state = action.data.err;
       return _state;
+    case actionConstants.GET_SLIDE_SUCCESS:
+      _state.slide = action.data.data;
+      return _state;
+    case actionConstants.GET_SLIDE_FAILURE:
+      _state = action.data.err;
+      return _state;
     default:
       return _state;
   }
@@ -79,7 +85,6 @@ const spReducer = (state = {}, action) => {
 
 const newsReducer = (state = {}, action) => {
   var _state = JSON.parse(JSON.stringify(state));
-  console.log(action.data);
   switch (action.type) {
     case actionConstants.GET_NEWS_SUCCESS:
       _state.data = action.data.data;

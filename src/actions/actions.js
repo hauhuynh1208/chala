@@ -2,6 +2,7 @@ import {actionConstants, API_URL} from '../constants';
 import axios from 'axios';
 
 export const actions = {
+  getSlide,
   queryProduct,
   getQuatCongNghiep,
   getLyToGiay,
@@ -12,6 +13,32 @@ export const actions = {
   addToCart,
   retrieveCart,
 };
+
+function getSlide() {
+  return async (dispatch, getState) => {
+    dispatch({type: actionConstants.START_QUERY});
+    await axios
+      .get(`${API_URL}/gethinh.php`)
+      .then((resp) => {
+        dispatch({
+          type: actionConstants.END_QUERY,
+        });
+        return dispatch({
+          type: actionConstants.GET_SLIDE_SUCCESS,
+          data: resp,
+        });
+      })
+      .catch((err) => {
+        dispatch({
+          type: actionConstants.END_QUERY,
+        });
+        return dispatch({
+          type: actionConstants.GET_SLIDE_FAILURE,
+          data: err,
+        });
+      });
+  };
+}
 
 function queryProduct(keyword) {
   return async (dispatch, getState) => {

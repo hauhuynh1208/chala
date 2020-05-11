@@ -3,21 +3,24 @@ import styles from './styles';
 import {
   View,
   Text,
-  SafeAreaView,
   Image,
   ScrollView,
   TouchableOpacity,
+  SafeAreaView,
 } from 'react-native';
 import {Icon, Input} from 'react-native-elements';
+import SlideShow from './SlideShow';
 import Section from './Section';
 import {connect} from 'react-redux';
 import {actions} from '../../actions/actions';
 import {logo} from '../../assets';
+// import {SafeAreaView} from 'react-native-safe-area-context';
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      slide: [],
       keyword: '',
       quatCongNghiep: [],
       lyToGiay: [],
@@ -27,6 +30,7 @@ class Home extends React.Component {
 
   async componentDidMount() {
     await Promise.all([
+      this.props.getSlide(),
       this.props.getQuatCongNghiep(),
       this.props.getLyToGiay(),
       this.props.getMyNghe(),
@@ -35,6 +39,9 @@ class Home extends React.Component {
 
   static getDerivedStateFromProps(nextProps, prevState) {
     let state = {};
+    if (nextProps.general.slide !== prevState.slide) {
+      state.slide = nextProps.general.slide;
+    }
     if (nextProps.quat !== prevState.quatCongNghiep) {
       state.quatCongNghiep = nextProps.quat;
     }
@@ -78,6 +85,7 @@ class Home extends React.Component {
     ));
   };
   render() {
+    const {slide} = this.state;
     return (
       <SafeAreaView style={styles.screenContainer}>
         <ScrollView>
@@ -111,12 +119,7 @@ class Home extends React.Component {
             onChangeText={(text) => this.setState({keyword: text})}
             value={this.state.keyword}
           />
-          <View style={styles.slideContainer}>
-            <Image
-              source={{uri: 'https://loremflickr.com/g/320/240/paris,girl/all'}}
-              style={styles.slide}
-            />
-          </View>
+          <SlideShow slide={slide ? slide : []} />
           <View style={styles.content}>
             <View style={styles.gifContainer}>
               <Image
@@ -147,6 +150,7 @@ class Home extends React.Component {
 
 function mapStateToProps(state) {
   return {
+    general: state.general,
     quat: state.quat,
     giay: state.giay,
     tt: state.tt,

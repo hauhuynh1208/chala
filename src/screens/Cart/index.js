@@ -37,7 +37,9 @@ class Cart extends React.Component {
                 <Text style={styles.productText}>{prod.tensp}</Text>
               </View>
             ))}
-          <TouchableOpacity style={styles.checkoutBtn}>
+          <TouchableOpacity
+            style={styles.checkoutBtn}
+            onPress={() => this.props.navigation.navigate('CustomerInfo')}>
             <Text style={styles.checkoutText}>ĐĂNG KÝ MUA HÀNG</Text>
           </TouchableOpacity>
         </ScrollView>
