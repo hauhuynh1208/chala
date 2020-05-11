@@ -29,7 +29,6 @@ class News extends React.Component {
 
   render() {
     const {news} = this.state;
-    console.log(news, 'news');
     return (
       <SafeAreaView>
         <View style={styles.container}>

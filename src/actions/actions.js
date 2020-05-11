@@ -202,7 +202,6 @@ function getNews() {
     await axios
       .get(`${API_URL}/gettintuc.php`)
       .then((resp) => {
-        console.log(resp, 'resp');
         dispatch({
           type: actionConstants.END_QUERY,
         });
@@ -236,6 +235,7 @@ function addToCart(sp) {
 
 function retrieveCart() {
   return (dispatch, getState) => {
+    console.log(getState().cart.cart, 'cart');
     return getState().cart.cart;
     // dispatch({type: actionConstants.START_QUERY});
     // dispatch({

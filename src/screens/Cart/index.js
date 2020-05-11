@@ -11,12 +11,21 @@ class Cart extends React.Component {
     this.state = {
       cart: [],
     };
+    this.listenerId = null;
   }
 
   componentDidMount() {
-    const cart = this.props.retrieveCart();
-    if (this.state.cart !== cart) {
-      this.setState({cart});
+    this.listenerId = this.props.navigation.addListener('focus', () => {
+      const cart = this.props.retrieveCart();
+      if (this.state.cart !== cart) {
+        this.setState({cart});
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    if (this.listenerId !== null) {
+      this.listenerId();
     }
   }
 
