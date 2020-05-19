@@ -293,7 +293,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = PKPH599W74;
+						DevelopmentTeam = 7DBBM8MCA5;
 						LastSwiftMigration = 1120;
 						ProvisioningStyle = Manual;
 					};
@@ -730,8 +730,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 3;
-				DEVELOPMENT_TEAM = PKPH599W74;
+				CURRENT_PROJECT_VERSION = 5;
+				DEVELOPMENT_TEAM = 7DBBM8MCA5;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
@@ -739,14 +739,15 @@
 				);
 				INFOPLIST_FILE = chala/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.1.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.chala;
 				PRODUCT_NAME = chala;
-				PROVISIONING_PROFILE_SPECIFIER = "chala app profile";
+				PROVISIONING_PROFILE_SPECIFIER = "chala development profile";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -761,18 +762,19 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 3;
-				DEVELOPMENT_TEAM = PKPH599W74;
+				CURRENT_PROJECT_VERSION = 5;
+				DEVELOPMENT_TEAM = 7DBBM8MCA5;
 				INFOPLIST_FILE = chala/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.1.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.chala;
 				PRODUCT_NAME = chala;
-				PROVISIONING_PROFILE_SPECIFIER = "chala app release";
+				PROVISIONING_PROFILE_SPECIFIER = "chala release profile";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

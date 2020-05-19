@@ -175,10 +175,26 @@ export default function AppNavigation() {
               tabStyle: {backgroundColor: colors.primary},
               style: {backgroundColor: colors.primary},
             }}>
-            <Tab.Screen name="Home" component={HomeStackScreen} />
-            <Tab.Screen name="Product" component={ProductStackScreen} />
-            <Tab.Screen name="News" component={NewsStackScreen} />
-            <Tab.Screen name="Cart" component={Cart} />
+            <Tab.Screen
+              name="Home"
+              options={{tabBarLabel: 'Trang chủ'}}
+              component={HomeStackScreen}
+            />
+            <Tab.Screen
+              name="Product"
+              options={{tabBarLabel: 'Sản phẩm'}}
+              component={ProductStackScreen}
+            />
+            <Tab.Screen
+              name="News"
+              options={{tabBarLabel: 'Tin tức'}}
+              component={NewsStackScreen}
+            />
+            <Tab.Screen
+              name="Cart"
+              options={{tabBarLabel: 'Giỏ hàng'}}
+              component={Cart}
+            />
           </Tab.Navigator>
         </NavigationContainer>
       </SafeAreaProvider>
