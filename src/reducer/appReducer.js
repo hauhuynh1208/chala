@@ -63,6 +63,34 @@ const ttReducer = (state = {}, action) => {
   }
 };
 
+const tsReducer = (state = {}, action) => {
+  var _state = JSON.parse(JSON.stringify(state));
+  switch (action.type) {
+    case actionConstants.GET_TS_SUCCESS:
+      _state.data = action.data.data;
+      return _state;
+    case actionConstants.GET_TS_FAILURE:
+      _state = action.data.err;
+      return _state;
+    default:
+      return _state;
+  }
+};
+
+const mlReducer = (state = {}, action) => {
+  var _state = JSON.parse(JSON.stringify(state));
+  switch (action.type) {
+    case actionConstants.GET_ML_SUCCESS:
+      _state.data = action.data.data;
+      return _state;
+    case actionConstants.GET_ML_FAILURE:
+      _state = action.data.err;
+      return _state;
+    default:
+      return _state;
+  }
+};
+
 const spReducer = (state = {}, action) => {
   var _state = JSON.parse(JSON.stringify(state));
   switch (action.type) {
@@ -115,6 +143,8 @@ const combinedReducer = combineReducers({
   quat: quatReducer,
   giay: giayReducer,
   tt: ttReducer,
+  ts: tsReducer,
+  ml: mlReducer,
   sp: spReducer,
   news: newsReducer,
   cart: cartReducer,

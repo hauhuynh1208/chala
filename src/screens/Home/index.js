@@ -25,6 +25,8 @@ class Home extends React.Component {
       quatCongNghiep: [],
       lyToGiay: [],
       ttMyNghe: [],
+      traSua: [],
+      mlCongNghiep: [],
     };
   }
 
@@ -34,6 +36,8 @@ class Home extends React.Component {
       this.props.getQuatCongNghiep(),
       this.props.getLyToGiay(),
       this.props.getMyNghe(),
+      this.props.getTraSua(),
+      this.props.getMLCongNghiep(),
     ]);
   }
 
@@ -50,6 +54,12 @@ class Home extends React.Component {
     }
     if (nextProps.tt !== prevState.ttMyNghe) {
       state.ttMyNghe = nextProps.tt;
+    }
+    if (nextProps.ts !== prevState.traSua) {
+      state.traSua = nextProps.ts;
+    }
+    if (nextProps.ml !== prevState.mlCongNghiep) {
+      state.mlCongNghiep = nextProps.ml;
     }
     return Object.keys(state).length ? state : null;
   }
@@ -85,7 +95,7 @@ class Home extends React.Component {
     ));
   };
   render() {
-    const {slide} = this.state;
+    const {slide, traSua, mlCongNghiep} = this.state;
     return (
       <SafeAreaView style={styles.screenContainer}>
         <ScrollView>
@@ -141,6 +151,14 @@ class Home extends React.Component {
               title="Trang trí mỹ nghệ"
               content={this.renderContent(this.state.ttMyNghe.data)}
             />
+            <Section
+              title="Trà sữa trân châu"
+              content={this.renderContent(traSua.data)}
+            />
+            <Section
+              title="Máy lạnh công nghiệp"
+              content={this.renderContent(mlCongNghiep.data)}
+            />
           </View>
         </ScrollView>
       </SafeAreaView>
@@ -154,6 +172,8 @@ function mapStateToProps(state) {
     quat: state.quat,
     giay: state.giay,
     tt: state.tt,
+    ts: state.ts,
+    ml: state.ml,
   };
 }
 

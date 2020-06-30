@@ -7,6 +7,8 @@ export const actions = {
   getQuatCongNghiep,
   getLyToGiay,
   getMyNghe,
+  getTraSua,
+  getMLCongNghiep,
   fetchProductCat,
   getProductList,
   getNews,
@@ -144,6 +146,58 @@ function getMyNghe() {
   };
 }
 
+function getTraSua() {
+  return async (dispatch, getState) => {
+    dispatch({type: actionConstants.START_QUERY});
+    await axios
+      .get(`${API_URL}/getspd.php`)
+      .then((resp) => {
+        dispatch({
+          type: actionConstants.END_QUERY,
+        });
+        return dispatch({
+          type: actionConstants.GET_TS_SUCCESS,
+          data: resp,
+        });
+      })
+      .catch((err) => {
+        dispatch({
+          type: actionConstants.END_QUERY,
+        });
+        return dispatch({
+          type: actionConstants.GET_TS_FAILURE,
+          data: err,
+        });
+      });
+  };
+}
+
+function getMLCongNghiep() {
+  return async (dispatch, getState) => {
+    dispatch({type: actionConstants.START_QUERY});
+    await axios
+      .get(`${API_URL}/getspe.php`)
+      .then((resp) => {
+        dispatch({
+          type: actionConstants.END_QUERY,
+        });
+        return dispatch({
+          type: actionConstants.GET_ML_SUCCESS,
+          data: resp,
+        });
+      })
+      .catch((err) => {
+        dispatch({
+          type: actionConstants.END_QUERY,
+        });
+        return dispatch({
+          type: actionConstants.GET_ML_FAILURE,
+          data: err,
+        });
+      });
+  };
+}
+
 function fetchProductCat() {
   return async (dispatch, getState) => {
     dispatch({type: actionConstants.START_QUERY});
@@ -235,7 +289,7 @@ function addToCart(sp) {
 
 function retrieveCart() {
   return (dispatch, getState) => {
-    console.log(getState().cart.cart, 'cart');
+    // console.log(getState().cart.cart, 'cart');
     return getState().cart.cart;
     // dispatch({type: actionConstants.START_QUERY});
     // dispatch({
